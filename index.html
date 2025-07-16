@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Supabase Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">💬 Supabase Messages Demo</h2>
+
+    <!-- Form to add new message -->
+    <form id="message-form" class="mb-4">
+      <div class="input-group">
+        <input type="text" id="message-input" class="form-control" placeholder="Type a message..." required>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </form>
+
+    <!-- Message list -->
+    <ul id="messages-list" class="list-group"></ul>
+  </div>
+
+<script>
+  const SUPABASE_URL = 'https://vsaabuhfhznbjmecwugp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzYWFidWhmaHpuYmptZWN3dWdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIxNDUyOTUsImV4cCI6MjA2NzcyMTI5NX0.r96Ov5J5YCfkXUKLnpDRJFcYc0Pxl_wX4l-x07fj9vo';
+
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function loadMessages() {
+    const { data, error } = await client
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const list = document.getElementById('messages-list');
+    list.innerHTML = '';
+
+    if (data) {
+      data.forEach(msg => {
+        const item = document.createElement('li');
+        item.className = 'list-group-item';
+        item.textContent = `${msg.content} (${new Date(msg.created_at).toLocaleString()})`;
+        list.appendChild(item);
+      });
+    }
+  }
+
+  document.getElementById('message-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('message-input');
+    const content = input.value.trim();
+
+    if (content) {
+      const { error } = await client
+        .from('messages')
+        .insert([{ content }]);
+
+      if (!error) {
+        input.value = '';
+        loadMessages();
+      } else {
+        alert('Error saving message');
+      }
+    }
+  });
+
+  loadMessages();
+</script>
+
+</body>
+</html>

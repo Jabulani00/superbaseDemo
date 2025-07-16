@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Business Card Component</title>
+    <style>
+      .business-card-container {
+  perspective: 1000px;
+  width: 300px;
+  height: 200px;
+  margin: 20px auto;
+}
+
+.business-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.business-card:hover {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #1a1a3d 0%, #4a2c6b 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #2c1a3d 0%, #1a1a3d 100%);
+  color: #fff;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.geometric-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.theme-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #FFD700;
+  color: #1a1a3d;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background: #FFD700;
+  color: #1a1a3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.name-section {
+  z-index: 1;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFD700;
+}
+
+.department {
+  font-size: 12px;
+  color: #d3d3d3;
+}
+
+.decorative-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, #FFD700, transparent);
+  margin: 10px 0;
+  z-index: 1;
+}
+
+.hover-instruction {
+  font-size: 12px;
+  color: #d3d3d3;
+  text-align: center;
+  z-index: 1;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  z-index: 1;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.contact-icon {
+  font-size: 20px;
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-label {
+  font-size: 12px;
+  color: #d3d3d3;
+}
+
+.contact-value {
+  font-size: 14px;
+  font-weight: 500;
+}
+    </style>
+</head>
+<body>
+  <div class="business-card-container">
+  <div class="business-card" data-theme="executive">
+    <!-- Front Side -->
+    <div class="card-face card-front">
+      <div class="theme-badge">EXECUTIVE</div>
+      <svg class="geometric-pattern" viewBox="0 0 300 200" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="luxuryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a1a3d;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#4a2c6b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2c1a3d;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect width="300" height="200" fill="url(#luxuryGradient)" />
+        <path d="M0,0 L300,0 L150,200 Z" fill="rgba(255,215,0,0.1)" />
+        <path d="M300,0 L300,200 L150,200 Z" fill="rgba(255,215,0,0.05)" />
+        <circle cx="150" cy="100" r="50" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.3" />
+        <path d="M50,50 L250,50 L150,150 Z" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.2" />
+      </svg>
+      <div class="logo-section">
+        <div class="logo">IS</div>
+        <div class="company-name">Innovatech Solutions</div>
+      </div>
+      <div class="name-section">
+        <div class="name">Jane Doe</div>
+        <div class="title">Senior Product Manager</div>
+        <div class="department">Digital Innovation</div>
+      </div>
+      <div class="decorative-line"></div>
+      <div class="hover-instruction">Hover to view contact</div>
+    </div>
+    <!-- Back Side -->
+    <div class="card-face card-back">
+      <svg class="geometric-pattern" viewBox="0 0 300 200" preserveAspectRatio="none">
+        <rect width="300" height="200" fill="url(#luxuryGradient)" />
+        <path d="M0,200 L150,0 L300,200 Z" fill="rgba(255,215,0,0.1)" />
+        <circle cx="150" cy="100" r="40" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.3" />
+      </svg>
+      <div class="contact-info">
+        <div class="contact-item" onclick="handleContact('email', 'jane.doe@innovatech.com')">
+          <div class="contact-icon">✉</div>
+          <div class="contact-text">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">jane.doe@innovatech.com</div>
+          </div>
+        </div>
+        <div class="contact-item" onclick="handleContact('phone', '+27 82 456 7890')">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text">
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+27 82 456 7890</div>
+          </div>
+        </div>
+        <div class="contact-item" onclick="handleContact('website', 'jane-innovatech.com')">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-text">
+            <div class="contact-label">Website</div>
+            <div class="contact-value">jane-innovatech.com</div>
+          </div>
+        </div>
+        <div class="contact-item" onclick="handleContact('linkedin', 'linkedin.com/in/janedoe')">
+          <div class="contact-icon">💼</div>
+          <div class="contact-text">
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/janedoe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+   
+</body>
+</html>
